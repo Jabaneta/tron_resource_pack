@@ -37,4 +37,18 @@ jobs:
           # Create the release with the SHA-1 in the body
           gh release create "$TAG" \
             --title "Resource Pack ${{ github.run_number }}" \
-            --notes "$(
+            --notes "$(cat <<EOF
+          **Minecraft Resource Pack**
+
+          **SHA-1** (copy this into \`server.properties\`):
+          \`\`\`
+          ${{ env.SHA1 }}
+          \`\`\`
+
+          **Direct download link**:
+          \`\`\`
+          https://github.com/${{ github.repository }}/releases/download/$TAG/tron_resource_pack.zip
+          \`\`\`
+          EOF
+          )" \
+            tron_resource_pack.zip

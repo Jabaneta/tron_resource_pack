@@ -1,0 +1,35 @@
+name: Release Resource Pack
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tron_resource_pack.zip'   # only run when the zip changes
+  workflow_dispatch:               # also allow manual runs
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Calculate SHA-1
+        id: hash
+        run: |
+          SHA1=$(sha1sum tron_resource_pack.zip | awk '{print $1}')
+          echo "sha1=$SHA1" >> $GITHUB_OUTPUT
+          echo "SHA-1 of tron_resource_pack.zip: $SHA1"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: pack-${{ github.run_number }}
+          name: Resource Pack ${{ github.run_number }}
+          body: |
+            **Minecraft Resource Pack**
+
+            **SHA-1** (copy this into `server.properties`):

@@ -1,0 +1,27 @@
+{
+    "engine_normal": {
+        "sounds": [
+            "tron:engine_normal"
+        ]
+    },
+    "engine": {
+        "sounds": [
+            "tron:engine"
+        ]
+    },
+    "near1": {
+        "sounds": [
+            "tron:near1"
+        ]
+    },
+    "near2": {
+        "sounds": [
+            "tron:near2"
+        ]
+    },
+    "crash": {
+        "sounds": [
+            "tron:crash"
+        ]
+    }
+}

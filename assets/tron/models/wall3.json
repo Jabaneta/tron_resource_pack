@@ -1,0 +1,7 @@
+{
+	"parent":"tron:wall1",
+	"textures": {
+		"0": "tron:item/wall/3",
+		"particle": "tron:item/wall/3"
+	}
+}

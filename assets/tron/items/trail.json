@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "model",
+    "model": "tron:trail",
+    "tints": [
+        {
+          "type": "minecraft:dye",
+          "default": -1
+        }
+      ]
+  }
+}

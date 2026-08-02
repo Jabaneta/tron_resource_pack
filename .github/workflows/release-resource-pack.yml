@@ -1,0 +1,44 @@
+name: Release Resource Pack
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check if zip exists
+        run: |
+          ls -la
+          if [ ! -f "tron_resource_pack.zip" ]; then
+            echo "ERROR: tron_resource_pack.zip not found in the root of the repository!"
+            exit 1
+          fi
+
+      - name: Calculate SHA-1
+        id: hash
+        run: |
+          SHA1=$(sha1sum tron_resource_pack.zip | cut -d ' ' -f 1)
+          echo "SHA1=$SHA1" >> $GITHUB_ENV
+          echo "sha1=$SHA1" >> $GITHUB_OUTPUT
+          echo "========================================"
+          echo "SHA-1 of the pack is: $SHA1"
+          echo "========================================"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: pack-${{ github.run_number }}
+          name: Resource Pack ${{ github.run_number }}
+          body: |
+            **Minecraft Resource Pack**
+
+            **SHA-1** (copy this into `server.properties`):
